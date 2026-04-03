@@ -25,10 +25,10 @@ export const cartReducer = (
     state: CartState = initialState,
     action: CartActions
 ) => {
+
     if(action.type === "add-to-cart") {
 
         const itemExists = state.cart.find(guitar => guitar.id === action.payload.item.id)
-        console.log(itemExists)
         let updatedCart : CartItem[] = []
 
         if(itemExists) {
@@ -53,25 +53,30 @@ export const cartReducer = (
             cart: updatedCart
         }
     }
-    if(action.type === "remove-from-cart") {
 
+    if(action.type === "remove-from-cart") {
+        const updatedCart = state.cart.filter(item => item.id !== action.payload.id)
         return {
-            ...state
+            ...state,
+            cart: updatedCart
         }
     }
+
     if(action.type === "increase-quantity") {
 
         return {
             ...state
         }
     }
+
     if(action.type === "decrease-quantity") {
 
         return {
             ...state
         }
     }
-        if(action.type === "clear-cart") {
+
+    if(action.type === "clear-cart") {
 
         return {
             ...state
