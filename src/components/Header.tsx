@@ -6,12 +6,10 @@ import type { ActionDispatch } from "react"
 type HeaderProps = {
     cart: CartItem[]
     dispatch: ActionDispatch<[action: CartActions]>
-    increaseQuantity: (id: Guitar['id']) => void
-    decreaseQuantity: (id: Guitar['id']) => void
     clearCart: () => void
 }
 
-export default function Header({cart, dispatch,increaseQuantity, decreaseQuantity, clearCart} : HeaderProps ) {
+export default function Header({cart, dispatch, clearCart} : HeaderProps ) {
 
 
     // State Derivado
@@ -63,7 +61,7 @@ export default function Header({cart, dispatch,increaseQuantity, decreaseQuantit
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-dark"
-                                                                onClick={() => decreaseQuantity(guitar.id)}
+                                                                onClick={() => dispatch({type: "decrease-quantity", payload: {id: guitar.id}})}
                                                             >
                                                                 -
                                                             </button>
@@ -71,7 +69,7 @@ export default function Header({cart, dispatch,increaseQuantity, decreaseQuantit
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-dark"
-                                                                onClick={() => increaseQuantity(guitar.id)}
+                                                                onClick={() => dispatch({type: "increase-quantity", payload: {id: guitar.id}})}
                                                             >
                                                                 +
                                                             </button>
