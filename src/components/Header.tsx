@@ -1,4 +1,4 @@
-import type { CartItem, Guitar } from "../types"
+import type { CartItem } from "../types"
 import { useMemo } from "react"
 import type { CartActions } from "../reducers/cart-reducer"
 import type { ActionDispatch } from "react"
@@ -6,10 +6,9 @@ import type { ActionDispatch } from "react"
 type HeaderProps = {
     cart: CartItem[]
     dispatch: ActionDispatch<[action: CartActions]>
-    clearCart: () => void
 }
 
-export default function Header({cart, dispatch, clearCart} : HeaderProps ) {
+export default function Header({cart, dispatch} : HeaderProps ) {
 
 
     // State Derivado
@@ -95,7 +94,7 @@ export default function Header({cart, dispatch, clearCart} : HeaderProps ) {
                                 
                                 <button 
                                     className="btn btn-dark w-100 mt-3 p-2"
-                                    onClick={clearCart}
+                                    onClick={() => dispatch({type:"clear-cart"})}
                                 >
                                     Vaciar Carrito
                                 </button>
